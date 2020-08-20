@@ -2,8 +2,12 @@ package com.murillo.maciel.store;
 
 import java.util.Arrays;
 
+import com.murillo.maciel.store.domain.City;
 import com.murillo.maciel.store.domain.Product;
+import com.murillo.maciel.store.domain.State;
+import com.murillo.maciel.store.repositories.CityRepository;
 import com.murillo.maciel.store.repositories.ProductRepository;
+import com.murillo.maciel.store.repositories.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,6 +25,12 @@ public class StoreSpringApplication implements CommandLineRunner
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private StateRepository stateRepository;
+
+    @Autowired
+    private CityRepository cityRepository;
 
     public static void main(String[] args)
     {
@@ -45,8 +55,20 @@ public class StoreSpringApplication implements CommandLineRunner
         p2.getCategories().addAll(Arrays.asList(cat1, cat2));
         p3.getCategories().add(cat1);
 
+        State state1 = new State(null, "Minas Gerais");
+        State state2 = new State(null, "São Paulo");
+
+        City city1 = new City(null, "Uberlândia", state1);
+        City city2 = new City(null, "São Paulo", state2);
+        City city3 = new City(null, "Campinas", state2);
+
+        state1.getCities().add(city1);
+        state1.getCities().addAll(Arrays.asList(city2, city3));
+
         categoryRepository.saveAll(Arrays.asList(cat1, cat2));
         productRepository.saveAll(Arrays.asList(p1, p2, p3));
+        stateRepository.saveAll(Arrays.asList(state1, state2));
+        cityRepository.saveAll(Arrays.asList(city1, city2, city3));
     }
 
 }
