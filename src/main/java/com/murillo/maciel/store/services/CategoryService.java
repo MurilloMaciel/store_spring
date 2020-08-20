@@ -2,6 +2,7 @@ package com.murillo.maciel.store.services;
 
 import java.util.Optional;
 
+import com.murillo.maciel.store.services.exceptions.ObjNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,8 @@ public class CategoryService
 	
 	public Category search(Integer id)
 	{
+		ObjNotFoundException e = new ObjNotFoundException("Object not found, id -> " + id + ", type -> " + Category.class.getName());
 		Optional<Category> category = repository.findById(id);
-		return category.orElse(null);
+		return category.orElseThrow( () -> e );
 	}
 }
