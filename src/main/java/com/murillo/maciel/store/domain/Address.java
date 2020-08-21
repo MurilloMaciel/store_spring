@@ -1,5 +1,7 @@
 package com.murillo.maciel.store.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -22,6 +24,7 @@ public class Address implements Serializable
     @JoinColumn(name = "city_id")
     private City city;
 
+    @JsonBackReference // protege de serialização ciclica, sem serializar o client
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;

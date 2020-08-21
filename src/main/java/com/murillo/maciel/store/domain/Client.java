@@ -1,5 +1,6 @@
 package com.murillo.maciel.store.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.murillo.maciel.store.domain.enums.ClientType;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class Client implements Serializable
     private String cpfOrCnpj;
     private Integer clientTypeInt;
 
+    @JsonManagedReference // protege de serialização ciclica, permitindo serializar o endereço
     @OneToMany(mappedBy = "client")
     private List<Address> adresses = new ArrayList<>();
 
