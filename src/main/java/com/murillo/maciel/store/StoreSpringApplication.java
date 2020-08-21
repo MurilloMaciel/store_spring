@@ -1,9 +1,11 @@
 package com.murillo.maciel.store;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import com.murillo.maciel.store.domain.*;
 import com.murillo.maciel.store.domain.enums.ClientType;
+import com.murillo.maciel.store.domain.enums.PaymentStatus;
 import com.murillo.maciel.store.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -31,6 +33,12 @@ public class StoreSpringApplication implements CommandLineRunner
 
     @Autowired
     private ClientRepository clientRepository;
+
+    @Autowired
+    private PaymentRepository paymentRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     public static void main(String[] args)
     {
@@ -73,12 +81,27 @@ public class StoreSpringApplication implements CommandLineRunner
 
         client1.getAdresses().addAll(Arrays.asList(address1, address2));
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+        Order order1 = new Order(null, sdf.parse("30/09/2019 10:32"), client1, address1);
+        Order order2 = new Order(null, sdf.parse("10/10/2017 19:35"), client1, address2);
+
+        Payment payment1 = new CardPayment(null, PaymentStatus.CONFIRMED, order1, 6);
+        order1.setPayment(payment1);
+
+        Payment payment2 = new BankSlipPayment(null, PaymentStatus.PENDING, order2, sdf.parse("20/10/2017 00:00"), null);
+        order2.setPayment(payment2);
+
+        client1.getOrders().addAll(Arrays.asList(order1, order2));
+
         categoryRepository.saveAll(Arrays.asList(cat1, cat2));
         productRepository.saveAll(Arrays.asList(p1, p2, p3));
         stateRepository.saveAll(Arrays.asList(state1, state2));
         cityRepository.saveAll(Arrays.asList(city1, city2, city3));
         clientRepository.saveAll(Arrays.asList(client1));
         addressRepository.saveAll(Arrays.asList(address1, address2));
+        orderRepository.saveAll(Arrays.asList(order1, order2));
+        paymentRepository.saveAll(Arrays.asList(payment1, payment2));
     }
 
 }

@@ -21,7 +21,6 @@ public class CategoryResource
 	@Autowired
 	private CategoryService service;
 	
-	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id)
 	{

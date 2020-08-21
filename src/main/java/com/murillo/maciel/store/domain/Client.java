@@ -20,8 +20,11 @@ public class Client implements Serializable
     private String cpfOrCnpj;
     private Integer clientTypeInt;
 
-    @JsonManagedReference // protege de serialização ciclica, permitindo serializar o endereço
     @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
+
+    @JsonManagedReference // protege de serialização ciclica, permitindo serializar o endereço
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "client")
     private List<Address> adresses = new ArrayList<>();
 
     @ElementCollection
@@ -110,6 +113,16 @@ public class Client implements Serializable
     public void setPhones(Set<String> phones)
     {
         this.phones = phones;
+    }
+
+    public List<Order> getOrders()
+    {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders)
+    {
+        this.orders = orders;
     }
 
     @Override
