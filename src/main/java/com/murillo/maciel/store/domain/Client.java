@@ -20,6 +20,7 @@ public class Client implements Serializable
     private String cpfOrCnpj;
     private Integer clientTypeInt;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 

@@ -1,5 +1,6 @@
 package com.murillo.maciel.store.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.murillo.maciel.store.domain.enums.PaymentStatus;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public abstract class Payment implements Serializable
     private Integer id;
     private Integer paymentStatus;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "order_id")
     @MapsId
