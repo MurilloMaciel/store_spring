@@ -1,5 +1,6 @@
 package com.murillo.maciel.store;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
@@ -40,11 +41,13 @@ public class StoreSpringApplication implements CommandLineRunner
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private OrderItemRepository orderItemRepository;
+
     public static void main(String[] args)
     {
         SpringApplication.run(StoreSpringApplication.class, args);
     }
-
 
     @Override
     public void run(String... args) throws Exception
@@ -94,6 +97,17 @@ public class StoreSpringApplication implements CommandLineRunner
 
         client1.getOrders().addAll(Arrays.asList(order1, order2));
 
+        OrderItem orderItem1 = new OrderItem(order1, p1, 0.00, 1, 2000.00);
+        OrderItem orderItem2 = new OrderItem(order1, p3, 0.00, 2, 80.00);
+        OrderItem orderItem3 = new OrderItem(order2, p2, 100.00, 1, 800.00);
+
+        order1.getItens().addAll(Arrays.asList(orderItem1, orderItem2));
+        order2.getItens().addAll(Arrays.asList(orderItem3));
+
+        p1.getItens().addAll(Arrays.asList(orderItem1));
+        p2.getItens().addAll(Arrays.asList(orderItem3));
+        p3.getItens().addAll(Arrays.asList(orderItem2));
+
         categoryRepository.saveAll(Arrays.asList(cat1, cat2));
         productRepository.saveAll(Arrays.asList(p1, p2, p3));
         stateRepository.saveAll(Arrays.asList(state1, state2));
@@ -102,6 +116,7 @@ public class StoreSpringApplication implements CommandLineRunner
         addressRepository.saveAll(Arrays.asList(address1, address2));
         orderRepository.saveAll(Arrays.asList(order1, order2));
         paymentRepository.saveAll(Arrays.asList(payment1, payment2));
+        orderItemRepository.saveAll(Arrays.asList(orderItem1, orderItem2, orderItem3));
     }
 
 }
