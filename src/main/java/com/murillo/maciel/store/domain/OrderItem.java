@@ -24,6 +24,7 @@ public class OrderItem implements Serializable
 
     public OrderItem(Order order, Product product, Double discount, Integer count, Double price)
     {
+        super();
         this.id.setOrder(order);
         this.id.setProduct(product);
         this.discount = discount;
@@ -87,7 +88,8 @@ public class OrderItem implements Serializable
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderItem orderItem = (OrderItem) o;
-        return id.equals(orderItem.id);
+        if (this.id != null && orderItem.id != null) return (this.id.equals(orderItem.id));
+        return (this.id == null && orderItem.id == null);
     }
 
     @Override

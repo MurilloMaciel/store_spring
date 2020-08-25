@@ -125,7 +125,8 @@ public class Order implements Serializable
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return id.equals(order.id);
+        if (this.id != null && order.id != null) return (this.id.equals(order.id));
+        return (this.id == null && order.id == null);
     }
 
     @Override

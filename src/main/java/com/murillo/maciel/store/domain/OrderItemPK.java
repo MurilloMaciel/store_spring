@@ -45,8 +45,8 @@ public class OrderItemPK implements Serializable
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderItemPK that = (OrderItemPK) o;
-        return order.equals(that.order) &&
-                product.equals(that.product);
+        return Objects.equals(order, that.order) &&
+                Objects.equals(product, that.product);
     }
 
     @Override

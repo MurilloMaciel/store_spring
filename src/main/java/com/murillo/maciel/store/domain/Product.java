@@ -1,6 +1,7 @@
 package com.murillo.maciel.store.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -98,13 +99,15 @@ public class Product implements Serializable
         this.itens = itens;
     }
 
+
     @Override
     public boolean equals(Object o)
     {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id.equals(product.id);
+        if (this.id != null && product.id != null) return (this.id.equals(product.id));
+        return (this.id == null && product.id == null);
     }
 
     @Override
