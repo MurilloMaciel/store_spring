@@ -14,7 +14,7 @@ public class OrderService
 	@Autowired
 	private OrderRepository repository;
 	
-	public Order search(Integer id)
+	public Order find(Integer id)
 	{
 		ObjNotFoundException e = new ObjNotFoundException("Object not found, id -> " + id + ", type -> " + Order.class.getName());
 		Optional<Order> order = repository.findById(id);

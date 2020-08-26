@@ -15,7 +15,7 @@ public class CategoryService
 	@Autowired
 	private CategoryRepository repository;
 	
-	public Category search(Integer id)
+	public Category find(Integer id)
 	{
 		ObjNotFoundException e = new ObjNotFoundException("Object not found, id -> " + id + ", type -> " + Category.class.getName());
 		Optional<Category> category = repository.findById(id);
@@ -25,6 +25,12 @@ public class CategoryService
 	public Category insert(Category value)
 	{
 		value.setId(null);
-		return repository.save(value);
+		return repository.save(value); // método save serve tanto para atualizar quanto para inserir, depende do id == null
+	}
+
+	public Category update(Category value)
+	{
+		find(value.getId());
+		return repository.save(value); // método save serve tanto para atualizar quanto para inserir, depende do id == null
 	}
 }

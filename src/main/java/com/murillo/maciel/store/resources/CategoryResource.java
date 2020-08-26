@@ -1,8 +1,6 @@
 package com.murillo.maciel.store.resources;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +21,7 @@ public class CategoryResource
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id)
 	{
-		Category category = service.search(id);
+		Category category = service.find(id);
 		return ResponseEntity.ok(category);
 	}
 
@@ -37,6 +35,16 @@ public class CategoryResource
 				.buildAndExpand(value.getId())
 				.toUri();
 		return ResponseEntity.created(uri).build();
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Category value, @PathVariable Integer id)
+	{
+		value.setId(id);
+		value = service.update(value);
+		return ResponseEntity
+				.noContent()
+				.build();
 	}
 
 }

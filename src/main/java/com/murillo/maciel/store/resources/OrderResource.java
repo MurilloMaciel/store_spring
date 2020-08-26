@@ -20,7 +20,7 @@ public class OrderResource
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id)
 	{
-		Order order = service.search(id);
+		Order order = service.find(id);
 		return ResponseEntity.ok(order);
 	}
 

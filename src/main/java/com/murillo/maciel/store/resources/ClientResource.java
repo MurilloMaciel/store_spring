@@ -20,7 +20,7 @@ public class ClientResource
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id)
 	{
-		Client client = service.search(id);
+		Client client = service.find(id);
 		return ResponseEntity.ok(client);
 	}
 
