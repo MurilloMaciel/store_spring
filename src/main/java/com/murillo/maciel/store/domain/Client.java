@@ -1,5 +1,6 @@
 package com.murillo.maciel.store.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.murillo.maciel.store.domain.enums.ClientType;
 
@@ -20,7 +21,7 @@ public class Client implements Serializable
     private String cpfOrCnpj;
     private Integer clientTypeInt;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
