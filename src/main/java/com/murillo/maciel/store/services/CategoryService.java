@@ -2,8 +2,10 @@ package com.murillo.maciel.store.services;
 
 import java.util.Optional;
 
+import com.murillo.maciel.store.services.exceptions.DataIntegrityException;
 import com.murillo.maciel.store.services.exceptions.ObjNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.murillo.maciel.store.domain.Category;
@@ -32,5 +34,19 @@ public class CategoryService
 	{
 		find(value.getId());
 		return repository.save(value); // método save serve tanto para atualizar quanto para inserir, depende do id == null
+	}
+
+	public void delete(Integer id)
+	{
+		find(id);
+		try
+		{
+			repository.deleteById(id);
+		}
+		catch (DataIntegrityViolationException e)
+		{
+			throw new DataIntegrityException("Can't delete category with products");
+		}
+
 	}
 }
