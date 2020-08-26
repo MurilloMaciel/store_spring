@@ -1,17 +1,16 @@
 package com.murillo.maciel.store.resources;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.murillo.maciel.store.domain.Category;
 import com.murillo.maciel.store.services.CategoryService;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 @RestController
@@ -26,6 +25,18 @@ public class CategoryResource
 	{
 		Category category = service.search(id);
 		return ResponseEntity.ok(category);
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> insert(@RequestBody Category value)
+	{
+		value = service.insert(value);
+		URI uri = ServletUriComponentsBuilder
+				.fromCurrentRequest()
+				.path("/{id}")
+				.buildAndExpand(value.getId())
+				.toUri();
+		return ResponseEntity.created(uri).build();
 	}
 
 }

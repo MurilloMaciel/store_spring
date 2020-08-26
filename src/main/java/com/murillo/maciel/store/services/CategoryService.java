@@ -21,4 +21,10 @@ public class CategoryService
 		Optional<Category> category = repository.findById(id);
 		return category.orElseThrow( () -> e );
 	}
+
+	public Category insert(Category value)
+	{
+		value.setId(null);
+		return repository.save(value);
+	}
 }
