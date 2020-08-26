@@ -132,7 +132,8 @@ public class Client implements Serializable
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return id.equals(client.id);
+        if (this.id != null && client.id != null) return (this.id.equals(client.id));
+        return (this.id == null && client.id == null);
     }
 
     @Override

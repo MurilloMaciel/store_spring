@@ -104,9 +104,9 @@ public class StoreSpringApplication implements CommandLineRunner
         order1.getItens().addAll(Arrays.asList(orderItem1, orderItem2));
         order2.getItens().addAll(Arrays.asList(orderItem3));
 //
-//        p1.getItens().addAll(Arrays.asList(orderItem1));
-//        p2.getItens().addAll(Arrays.asList(orderItem3));
-//        p3.getItens().addAll(Arrays.asList(orderItem2));
+        p1.getItens().addAll(Arrays.asList(orderItem1));
+        p2.getItens().addAll(Arrays.asList(orderItem3));
+        p3.getItens().addAll(Arrays.asList(orderItem2));
 
         categoryRepository.saveAll(Arrays.asList(cat1, cat2));
         productRepository.saveAll(Arrays.asList(p1, p2, p3));
@@ -116,7 +116,7 @@ public class StoreSpringApplication implements CommandLineRunner
         addressRepository.saveAll(Arrays.asList(address1, address2));
         orderRepository.saveAll(Arrays.asList(order1, order2));
         paymentRepository.saveAll(Arrays.asList(payment1, payment2));
-//        orderItemRepository.saveAll(Arrays.asList(orderItem1, orderItem2, orderItem3));
+        orderItemRepository.saveAll(Arrays.asList(orderItem1, orderItem2, orderItem3));
     }
 
 }

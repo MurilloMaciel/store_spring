@@ -132,7 +132,8 @@ public class Address implements Serializable
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return id.equals(address.id);
+        if (this.id != null && address.id != null) return (this.id.equals(address.id));
+        return (this.id == null && address.id == null);
     }
 
     @Override

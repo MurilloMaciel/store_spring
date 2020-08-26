@@ -68,7 +68,8 @@ public class City implements Serializable
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         City city = (City) o;
-        return id.equals(city.id);
+        if (this.id != null && city.id != null) return (this.id.equals(city.id));
+        return (this.id == null && city.id == null);
     }
 
     @Override

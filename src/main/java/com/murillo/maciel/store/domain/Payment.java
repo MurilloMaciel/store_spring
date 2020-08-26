@@ -76,7 +76,8 @@ public abstract class Payment implements Serializable
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Payment payment = (Payment) o;
-        return id.equals(payment.id);
+        if (this.id != null && payment.id != null) return (this.id.equals(payment.id));
+        return (this.id == null && payment.id == null);
     }
 
     @Override

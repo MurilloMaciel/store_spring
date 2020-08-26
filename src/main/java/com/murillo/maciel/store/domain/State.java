@@ -68,7 +68,8 @@ public class State implements Serializable
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         State state = (State) o;
-        return id.equals(state.id);
+        if (this.id != null && state.id != null) return (this.id.equals(state.id));
+        return (this.id == null && state.id == null);
     }
 
     @Override
