@@ -54,6 +54,17 @@ public class StoreSpringApplication implements CommandLineRunner
     {
         Category cat1 = new Category(null, "Informática");
         Category cat2 = new Category(null, "Escritório");
+        Category cat3 = new Category(null, "Cama, Mesa e Banho");
+        Category cat4 = new Category(null, "Eletrônicos");
+        Category cat5 = new Category(null, "Jardinagem");
+        Category cat6 = new Category(null, "Decoração");
+        Category cat7 = new Category(null, "Perfumaria");
+        Category cat8 = new Category(null, "Gamer");
+        Category cat9 = new Category(null, "Carros");
+        Category cat10 = new Category(null, "Borrachas");
+        Category cat11 = new Category(null, "Escolar");
+        Category cat12 = new Category(null, "Banheiro");
+        Category cat13 = new Category(null, "Construção");
 
         Product p1 = new Product(null, "Computador", 2000.00);
         Product p2 = new Product(null, "Impressora", 800.00);
@@ -108,7 +119,7 @@ public class StoreSpringApplication implements CommandLineRunner
         p2.getItens().addAll(Arrays.asList(orderItem3));
         p3.getItens().addAll(Arrays.asList(orderItem2));
 
-        categoryRepository.saveAll(Arrays.asList(cat1, cat2));
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7,cat8,cat9,cat10,cat11,cat12,cat13));
         productRepository.saveAll(Arrays.asList(p1, p2, p3));
         stateRepository.saveAll(Arrays.asList(state1, state2));
         cityRepository.saveAll(Arrays.asList(city1, city2, city3));

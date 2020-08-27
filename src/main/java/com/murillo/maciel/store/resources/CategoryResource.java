@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import com.murillo.maciel.store.dto.CategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,6 +67,18 @@ public class CategoryResource
 				.stream()
 				.map( category -> new CategoryDTO(category) )
 				.collect(Collectors.toList());
+		return ResponseEntity.ok().body(categoryDTOS);
+	}
+
+	@RequestMapping(value="/page", method = RequestMethod.GET)
+	public ResponseEntity<?> findPage(
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction)
+	{
+		Page<Category> categories = service.findPage(page, linesPerPage, orderBy, direction);
+		Page<CategoryDTO> categoryDTOS = categories.map( category -> new CategoryDTO(category) );
 		return ResponseEntity.ok().body(categoryDTOS);
 	}
 
