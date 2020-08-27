@@ -1,5 +1,6 @@
 package com.murillo.maciel.store.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.murillo.maciel.store.services.exceptions.DataIntegrityException;
@@ -22,6 +23,11 @@ public class CategoryService
 		ObjNotFoundException e = new ObjNotFoundException("Object not found, id -> " + id + ", type -> " + Category.class.getName());
 		Optional<Category> category = repository.findById(id);
 		return category.orElseThrow( () -> e );
+	}
+
+	public List<Category> findAll()
+	{
+		return repository.findAll();
 	}
 
 	public Category insert(Category value)

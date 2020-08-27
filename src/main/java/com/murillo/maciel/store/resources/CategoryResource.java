@@ -1,7 +1,11 @@
 package com.murillo.maciel.store.resources;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import com.murillo.maciel.store.dto.CategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,6 +56,17 @@ public class CategoryResource
 		return ResponseEntity
 				.noContent()
 				.build();
+	}
+
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<?> findAll()
+	{
+		List<Category> categories = service.findAll();
+		List<CategoryDTO> categoryDTOS = categories
+				.stream()
+				.map( category -> new CategoryDTO(category) )
+				.collect(Collectors.toList());
+		return ResponseEntity.ok().body(categoryDTOS);
 	}
 
 }
