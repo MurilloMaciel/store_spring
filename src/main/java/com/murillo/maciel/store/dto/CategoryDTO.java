@@ -11,7 +11,7 @@ public class CategoryDTO implements Serializable
     private static final long serialVersionUID = 1L;
 
     private Integer id;
-    @NotEmpty(message = "Need to fill")
+    @NotEmpty(message = "Required field")
     @Length(min = 5, max = 80, message = "Length needs to be between 5 and 80")
     private String name;
 
