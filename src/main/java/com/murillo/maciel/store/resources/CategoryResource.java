@@ -15,6 +15,8 @@ import com.murillo.maciel.store.domain.Category;
 import com.murillo.maciel.store.services.CategoryService;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping(value = "/categories")
@@ -38,22 +40,24 @@ public class CategoryResource
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Category value)
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoryDTO value)
 	{
-		value = service.insert(value);
+		Category category = service.fromDto(value);
+		category = service.insert(category);
 		URI uri = ServletUriComponentsBuilder
 				.fromCurrentRequest()
 				.path("/{id}")
-				.buildAndExpand(value.getId())
+				.buildAndExpand(category.getId())
 				.toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Category value, @PathVariable Integer id)
+	public ResponseEntity<Void> update(@Valid @RequestBody CategoryDTO value, @PathVariable Integer id)
 	{
-		value.setId(id);
-		value = service.update(value);
+		Category category = service.fromDto(value);
+		category.setId(id);
+		category = service.update(category);
 		return ResponseEntity
 				.noContent()
 				.build();

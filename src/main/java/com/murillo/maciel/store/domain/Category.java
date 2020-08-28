@@ -1,6 +1,8 @@
 package com.murillo.maciel.store.domain;
 
 
+import com.murillo.maciel.store.dto.CategoryDTO;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,12 @@ public class Category implements Serializable
 
 	public Category()
 	{	
+	}
+
+	public Category(CategoryDTO categoryDTO)
+	{
+		this.id = categoryDTO.getId();
+		this.name = categoryDTO.getName();
 	}
 
 	public Category(Integer id, String name)

@@ -1,7 +1,9 @@
 package com.murillo.maciel.store.dto;
 
 import com.murillo.maciel.store.domain.Category;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 public class CategoryDTO implements Serializable
@@ -9,6 +11,8 @@ public class CategoryDTO implements Serializable
     private static final long serialVersionUID = 1L;
 
     private Integer id;
+    @NotEmpty(message = "Need to fill")
+    @Length(min = 5, max = 80, message = "Length needs to be between 5 and 80")
     private String name;
 
     CategoryDTO()

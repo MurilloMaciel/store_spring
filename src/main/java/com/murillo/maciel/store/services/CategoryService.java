@@ -3,6 +3,7 @@ package com.murillo.maciel.store.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.murillo.maciel.store.dto.CategoryDTO;
 import com.murillo.maciel.store.services.exceptions.DataIntegrityException;
 import com.murillo.maciel.store.services.exceptions.ObjNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +64,10 @@ public class CategoryService
 	{
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
 		return repository.findAll(pageRequest);
+	}
+
+	public Category fromDto(CategoryDTO value)
+	{
+		return new Category(value);
 	}
 }
