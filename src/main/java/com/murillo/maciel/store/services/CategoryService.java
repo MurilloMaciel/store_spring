@@ -42,8 +42,9 @@ public class CategoryService
 
 	public Category update(Category value)
 	{
-		find(value.getId());
-		return repository.save(value); // método save serve tanto para atualizar quanto para inserir, depende do id == null
+		Category newCategory = find(value.getId());
+		updateData(newCategory, value);
+		return repository.save(newCategory); // método save serve tanto para atualizar quanto para inserir, depende do id == null
 	}
 
 	public void delete(Integer id)
@@ -69,5 +70,10 @@ public class CategoryService
 	public Category fromDto(CategoryDTO value)
 	{
 		return new Category(value);
+	}
+
+	private void updateData(Category newCategory, Category category)
+	{
+		newCategory.setName(category.getName());
 	}
 }
