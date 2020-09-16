@@ -2,13 +2,16 @@ package com.murillo.maciel.store.resources;
 
 import com.murillo.maciel.store.domain.Client;
 import com.murillo.maciel.store.dto.ClientDTO;
+import com.murillo.maciel.store.dto.ClientNewDTO;
 import com.murillo.maciel.store.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +34,19 @@ public class ClientResource
 	{
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClientNewDTO value)
+	{
+		Client client = service.fromDto(value);
+		client = service.insert(client);
+		URI uri = ServletUriComponentsBuilder
+				.fromCurrentRequest()
+				.path("/{id}")
+				.buildAndExpand(client.getId())
+				.toUri();
+		return ResponseEntity.created(uri).build();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
