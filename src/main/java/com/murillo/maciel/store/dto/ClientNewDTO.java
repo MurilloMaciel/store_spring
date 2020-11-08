@@ -1,23 +1,39 @@
 package com.murillo.maciel.store.dto;
 
+import com.murillo.maciel.store.services.validation.ClientInsert;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClientInsert
 public class ClientNewDTO implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
-
+    @NotEmpty(message = "Preenchimento obrigatório")
+    @Length(min = 3, max = 120, message = "Length needs to be between 3 and 120")
     private String name;
+
+    @NotEmpty(message = "Preenchimento obrigatório")
+    @Email(message = "Email inválido")
     private String email;
+
+    @NotEmpty(message = "Preenchimento obrigatório")
     private String cpfOrCnpj;
     private Integer clientTypeInt;
 
+    @NotEmpty(message = "Preenchimento obrigatório")
     private String street;
+    @NotEmpty(message = "Preenchimento obrigatório")
     private String number;
     private String complement;
     private String neighborhood;
-    private String zipCode;
+    @NotEmpty(message = "Preenchimento obrigatório")
+        private String zipCode;
 
+    @NotEmpty(message = "Preenchimento obrigatório")
     private String phone1;
     private String phone2;
     private String phone3;

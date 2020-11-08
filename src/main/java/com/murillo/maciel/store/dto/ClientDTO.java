@@ -1,12 +1,14 @@
 package com.murillo.maciel.store.dto;
 
 import com.murillo.maciel.store.domain.Client;
+import com.murillo.maciel.store.services.validation.ClientUpdate;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClientUpdate
 public class ClientDTO implements Serializable
 {
     private static final long serialVersionUID = 1L;
